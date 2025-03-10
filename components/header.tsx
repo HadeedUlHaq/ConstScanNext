@@ -38,9 +38,6 @@ export async function Header() {
                     <Link href="/scan" className="flex items-center gap-2 text-sm font-medium">
                       Scan Document
                     </Link>
-                    <Link href="/upload" className="flex items-center gap-2 text-sm font-medium">
-                      Upload Document
-                    </Link>
                     <Link href="/documents" className="flex items-center gap-2 text-sm font-medium">
                       My Documents
                     </Link>
@@ -74,9 +71,6 @@ export async function Header() {
             <>
               <Link href="/scan" className="flex items-center gap-2 text-sm font-medium">
                 Scan Document
-              </Link>
-              <Link href="/upload" className="flex items-center gap-2 text-sm font-medium">
-                Upload Document
               </Link>
               <Link href="/documents" className="flex items-center gap-2 text-sm font-medium">
                 My Documents

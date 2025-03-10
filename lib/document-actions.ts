@@ -188,3 +188,35 @@ export async function deleteDocument(id: string) {
     throw new Error(errorMessage)
   }
 }
+export async function renameDocument(id: string, newName: string) {
+  const user = await requireAuth()
+
+  try {
+    const { firestore } = initFirebaseAdminApp()
+
+    // Get the document to check ownership
+    const docRef = firestore.collection("documents").doc(id)
+    const doc = await docRef.get()
+
+    if (!doc.exists) {
+      throw new Error("Document not found")
+    }
+
+    const data = doc.data()
+
+    if (data?.userId !== user.uid) {
+      throw new Error("Unauthorized")
+    }
+
+    // Update the document name
+    await docRef.update({
+      name: newName,
+    })
+
+    revalidatePath("/documents")
+    return { success: true }
+  } catch (error: any) {
+    console.error("Error renaming document:", error)
+    throw new Error(error.message || "Failed to rename document")
+  }
+}

@@ -1,9 +1,8 @@
 "use client"
 
-import { useState } from "react"
-import { Trash2 } from "lucide-react"
+import type React from "react"
 
-import { Button } from "@/components/ui/button"
+import { useState } from "react"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -20,9 +19,10 @@ import { deleteDocument } from "@/lib/document-actions"
 
 interface DeleteDocumentButtonProps {
   id: string
+  children?: React.ReactNode
 }
 
-export function DeleteDocumentButton({ id }: DeleteDocumentButtonProps) {
+export function DeleteDocumentButton({ id, children }: DeleteDocumentButtonProps) {
   const [isDeleting, setIsDeleting] = useState(false)
   const { toast } = useToast()
 
@@ -48,10 +48,7 @@ export function DeleteDocumentButton({ id }: DeleteDocumentButtonProps) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="outline" size="icon" className="h-8 w-8">
-          <Trash2 className="h-4 w-4" />
-          <span className="sr-only">Delete</span>
-        </Button>
+        {children || <button className="text-red-500 hover:text-red-700">Delete</button>}
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
